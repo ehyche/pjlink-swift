@@ -22,7 +22,7 @@ pod 'PJLinkSwift'
 
 ## Author
 
-Eric Hyche, ehyche@groupon.com
+Eric Hyche, ehyche@gmail.com
 
 ## License
 

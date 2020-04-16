@@ -1,0 +1,6 @@
+framework module PJLinkSwift {
+  umbrella header "PJLinkSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}

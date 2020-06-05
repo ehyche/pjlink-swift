@@ -1,22 +1,23 @@
 {
   "name": "PJLinkSwift",
   "version": "0.1.0",
-  "summary": "A short description of PJLinkSwift.",
-  "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/Eric Hyche/PJLinkSwift",
+  "summary": "A Swift library for communicating with projectors using the PJLink protocol.",
+  "description": "PJLinkSwift is a Swift library for communicating with projectors using the PJLink protocol. \nIt is a successor to PJLinkCocoa, which was written in Objective-C and only supported Class 1\nof the PJLink protocol. This library is 100% Swift and supports both Class 1 and Class 2.",
+  "homepage": "https://github.com/ehyche/pjlink-swift",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "Eric Hyche": "ehyche@groupon.com"
+    "Eric Hyche": "ehyche@gmail.com"
   },
   "source": {
-    "git": "https://github.com/Eric Hyche/PJLinkSwift.git",
+    "git": "https://github.com/ehyche/pjlink-swift.git",
     "tag": "0.1.0"
   },
+  "social_media_url": "https://twitter.com/ehyche",
   "platforms": {
-    "ios": "8.0"
+    "ios": "13.0"
   },
   "source_files": "PJLinkSwift/Classes/**/*"
 }

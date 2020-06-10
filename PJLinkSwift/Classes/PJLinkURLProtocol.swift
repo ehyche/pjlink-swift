@@ -7,43 +7,71 @@
 
 import Foundation
 
-class PJLinkURLProtocol: URLProtocol {
+public class PJLinkURLProtocol: URLProtocol {
+    
+    // MARK: - Public properties
+    
+    public static let scheme = "pjlink"
+    public static let defaultPort = 4352
+    
+    // MARK: - Private properties
 
-    init(request: URLRequest, cachedResponse: CachedURLResponse?, client: URLProtocolClient?) {
-        
+    // MARK: - Initializers
+    
+    public override init(request: URLRequest, cachedResponse: CachedURLResponse?, client: URLProtocolClient?) {
+        super.init(request: request, cachedResponse: cachedResponse, client: client)
     }
-
-    convenience init(task: URLSessionTask, cachedResponse: CachedURLResponse?, client: URLProtocolClient?) {
-        
+    
+    public convenience init(task: URLSessionTask, cachedResponse: CachedURLResponse?, client: URLProtocolClient?) {
+        self.init(request: task.originalRequest!, cachedResponse: cachedResponse, client: client)
     }
+    
+    // MARK: - Public URLProtocol overrides
 
-    class func canInit(with request: URLRequest) -> Bool {
-        guard let urlScheme = request.url?.scheme else {
-            return false
-        }
-        return urlScheme = "pjlink"
+    public override class func canInit(with request: URLRequest) -> Bool {
+        return request.url?.scheme == PJLinkURLProtocol.scheme
     }
-
-    class func canInit(with task: URLSessionTask) -> Bool {
+    
+    public override class func canInit(with task: URLSessionTask) -> Bool {
         guard let request = task.currentRequest else {
             return false
         }
         return canInit(with: request)
     }
 
-    class func canonicalRequest(for request: URLRequest) -> URLRequest {
-        
+    public override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
     }
 
-    class func requestIsCacheEquivalent(_ a: URLRequest, to b: URLRequest) -> Bool {
+    public override class func requestIsCacheEquivalent(_ a: URLRequest, to b: URLRequest) -> Bool {
+        // Check the scheme
+        guard let schemeA = a.url?.scheme,
+              let schemeB = b.url?.scheme,
+              schemeA == schemeB,
+              schemeA == PJLinkURLProtocol.scheme else {
+            return false
+        }
+        
+        // Check the host
+        guard let hostA = a.url?.host,
+              let hostB = b.url?.host,
+            hostA == hostB else {
+            return false
+        }
+        
+        // Check the body data
+        guard let bodyA = a.httpBody, let bodyB = b.httpBody, bodyA == bodyB else {
+            return false
+        }
+        
         return true
     }
 
-    func startLoading() {
+    public override func startLoading() {
         
     }
 
-    func stopLoading() {
+    public override func stopLoading() {
         
     }
 

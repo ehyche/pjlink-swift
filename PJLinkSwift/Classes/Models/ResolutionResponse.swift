@@ -16,6 +16,25 @@ public enum ResolutionResponse {
     private static let unknownSignalToken = "*"
 }
 
+extension ResolutionResponse: Encodable {
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(self.toString())
+    }
+
+}
+
+extension ResolutionResponse: Decodable {
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let string = try container.decode(String.self)
+        try self.init(fromString: string)
+    }
+
+}
+
 extension ResolutionResponse: Serializable {
 
     public func toString() -> String {

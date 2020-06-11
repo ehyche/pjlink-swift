@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ResolutionInfo {
+public struct ResolutionInfo: Codable {
     public var horizontal: Int
     public var vertical: Int
 

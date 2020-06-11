@@ -15,6 +15,18 @@ public struct Response {
     public var code: CommandCode
     public var data: String
     
+    // MARK: - Initializers
+    
+    public init(cmdClass: CommandClass, code: CommandCode, data: String) {
+        self.cmdClass = cmdClass
+        self.code = code
+        self.data = data
+    }
+    
+    public init(cmdClass: CommandClass, code: CommandCode, setResponseCode: SetResponseCode) {
+        self.init(cmdClass: cmdClass, code: code, data: setResponseCode.rawValue)
+    }
+    
     // MARK: - Internal static constants
     static let arraySeparator: Character = " "
 

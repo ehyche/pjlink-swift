@@ -13,11 +13,8 @@ public struct Command {
 
     public private(set) var cmdClass: CommandClass
     public private(set) var code: CommandCode
+    public private(set) var parameters: String
 
-    // MARK: - Private properties
-
-    private var parameters: String
-    
     // MARK: - Internal static constants
     static let header: Character = "%"
     static let terminator: Character = "\n"

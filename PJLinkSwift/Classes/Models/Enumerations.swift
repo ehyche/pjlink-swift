@@ -7,9 +7,17 @@
 
 import Foundation
 
-public enum CommandClass: String {
+public enum CommandClass: String, Codable, Equatable {
     case one = "1"
     case two = "2"
+}
+
+extension CommandClass: Comparable {
+
+    public static func < (lhs: CommandClass, rhs: CommandClass) -> Bool {
+        return lhs.rawValue < rhs.rawValue
+    }
+    
 }
 
 extension CommandClass: Serializable {
@@ -76,6 +84,45 @@ public enum CommandCode: String {
     init?(caseInsensitiveRawValue: String) {
         self.init(rawValue: caseInsensitiveRawValue.uppercased())
     }
+
+    public var minimumSupportedClass: CommandClass {
+        switch self {
+        case .power, .input, .avMute, .errorStatus, .lamp,
+             .deviceName, .manufacturerName, .productName,
+             .otherInfo, .classInfo, .inputList:
+            return .one
+        case .serialNumber, .softwareVersion, .inputTerminalName,
+             .inputResolution, .recommendedResolution, .filterUsageTime,
+             .lampReplacementModelNumber, .filterReplacementModelNumber,
+             .speakerVolumeAdjustment, .microphoneVolumeAdjustment,
+             .freeze, .acknowledged, .linkupStatus, .search:
+            return .two
+        }
+    }
+    
+    public var hasGet: Bool {
+        switch self {
+        case .power, .input, .avMute, .errorStatus, .lamp, .inputList,
+             .deviceName, .manufacturerName, .productName, .otherInfo,
+             .classInfo, .serialNumber, .softwareVersion, .inputTerminalName,
+             .inputResolution, .recommendedResolution, .filterUsageTime,
+             .lampReplacementModelNumber, .filterReplacementModelNumber,
+             .freeze:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    public var hasSet: Bool {
+        switch self {
+        case .power, .input, .avMute, .speakerVolumeAdjustment,
+             .microphoneVolumeAdjustment, .freeze:
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 public enum InputType: String {
@@ -101,11 +148,29 @@ public enum MuteState: String {
 public enum VolumeAdjustment: String {
     case increase = "1"
     case decrease = "0"
+    
+    public func apply(to level: Int) -> Int {
+        switch self {
+        case .increase: return level + 1
+        case .decrease: return level - 1
+        }
+    }
 }
 
 public enum FreezeState: String {
     case freeze = "1"
     case unfreeze = "0"
+    
+    public var frozen: Bool {
+        switch self {
+        case .freeze: return true
+        case .unfreeze: return false
+        }
+    }
+    
+    public init(frozen: Bool) {
+        self = frozen ? .freeze : .unfreeze
+    }
 }
 
 extension FreezeState: Serializable {
@@ -127,13 +192,13 @@ extension FreezeState: Deserializable {
 
 }
 
-public enum ErrorState: String {
+public enum ErrorState: String, Codable {
     case noError = "0"
     case warning = "1"
     case error = "2"
 }
 
-public enum LampState: String {
+public enum LampState: String, Codable {
     case off = "0"
     case on = "1"
 }

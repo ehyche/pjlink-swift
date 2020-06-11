@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum PowerState: String {
+public enum PowerState: String, Codable {
     case off = "0"
     case on  = "1"
     case cooling = "2"

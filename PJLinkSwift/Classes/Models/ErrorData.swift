@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ErrorData {
+public struct ErrorData: Codable {
     public var fan: ErrorState
     public var lamp: ErrorState
     public var temperature: ErrorState

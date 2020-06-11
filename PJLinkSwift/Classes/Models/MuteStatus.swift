@@ -10,6 +10,31 @@ import Foundation
 public struct MuteStatus {
     public var channels: AudioVideo
     public var mute: MuteState
+    
+    public var audioMuted: Bool {
+        return mute == .on && (channels == .audio || channels == .audioAndVideo)
+    }
+    
+    public var videoMuted: Bool {
+        return mute == .on && (channels == .video || channels == .audioAndVideo)
+    }
+    
+    public init(audioMuted: Bool, videoMuted: Bool) {
+        switch (audioMuted, videoMuted) {
+        case (false, false):
+            channels = .audioAndVideo
+            mute = .off
+        case (false, true):
+            channels = .video
+            mute = .on
+        case (true, false):
+            channels = .audio
+            mute = .on
+        case (true, true):
+            channels = .audioAndVideo
+            mute = .on
+        }
+    }
 }
 
 extension MuteStatus: Serializable {

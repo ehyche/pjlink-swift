@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct LampStatus {
+public struct LampStatus: Codable {
     public var usage: Int
     public var state: LampState
     

@@ -24,6 +24,7 @@ public enum DeserializationError: Error {
     case invalidSetResponseCode(String)
     case noCommands
     case invalidGetCommandResponse(CommandCode)
+    case invalidStatusResponse(CommandCode)
     case invalidIntegerString(String)
     case invalidFreezeState(String)
 }

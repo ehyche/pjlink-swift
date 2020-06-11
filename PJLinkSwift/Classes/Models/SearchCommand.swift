@@ -11,7 +11,7 @@ public struct SearchCommand {
     
     private static let header: Character = "%"
     private static let cmdClass = CommandClass.two
-    private static let code = CommandCode.searchStart
+    private static let code = CommandCode.search
     private static let terminator: Character = "\n"
 
 }
@@ -33,7 +33,7 @@ extension SearchCommand: Deserializable {
         }
         
         let cmdStr = String(chars[2...5])
-        guard cmdStr == CommandCode.searchStart.rawValue else {
+        guard cmdStr == CommandCode.search.rawValue else {
             throw DeserializationError.unrecognizedCommandCode(cmdStr)
         }
         

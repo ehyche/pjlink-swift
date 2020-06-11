@@ -47,7 +47,7 @@ public enum GetErrorCode: String, Error {
 }
 
 public enum CommandCode: String {
-    case searchStart = "SRCH"
+    case search = "SRCH"
     case acknowledged = "ACKN"
     case linkupStatus = "LKUP"
     case errorStatus = "ERST"

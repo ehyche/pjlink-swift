@@ -60,6 +60,36 @@ extension String {
         return cmds
     }
     
+    func parseAsPJLinkRequest() -> (auth: String, commands: [String]) {
+        var auth = ""
+        var cmds = [String]()
+
+        var firstHeader = true
+        var index: String.Index? = self.startIndex
+        while index != nil {
+            // Search for command header
+            index = self.nextIndex(of: Command.header, from: index!)
+            if index != nil {
+                let headerIndex = index!
+                if firstHeader {
+                    auth = String(self[startIndex..<headerIndex]).trimmingCharacters(in: CharacterSet.whitespaces)
+                    firstHeader = false
+                }
+                // Search for command terminator
+                index = self.nextIndex(of: Command.terminator, from: self.index(after: headerIndex))
+                if index != nil {
+                    let terminatorIndex = index!
+                    // Create a string from the range headerIndex...terminatorIndex
+                    cmds.append(String(self[headerIndex...terminatorIndex]))
+                    // Update to start the search after the terminator
+                    index = self.index(after: terminatorIndex)
+                }
+            }
+        }
+
+        return (auth: auth, commands: cmds)
+    }
+    
     public func responses() throws -> [Response] {
         var resp = [Response]()
 
@@ -74,6 +104,13 @@ extension String {
         }
 
         return resp
+    }
+    
+    public func asUTF8Data() throws -> Data {
+        guard let data = self.data(using: .utf8) else {
+            throw DeserializationError.badAsciiData
+        }
+        return data
     }
 
 }

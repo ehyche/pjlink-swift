@@ -46,6 +46,14 @@ public struct ProjectorState: Codable {
         videoMuted = muteStatus.videoMuted
     }
     
+    public mutating func response(toCommand command: Command) -> Response {
+        if command.isGet {
+            return response(forGetCommand: command)
+        } else {
+            return response(forSetCommand: command)
+        }
+    }
+    
     public func response(forGetCommand command: Command) -> Response {
         // Make sure this command code supports a get and
         // that this projector can handle this class of command.

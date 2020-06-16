@@ -1,3 +1,15 @@
+//
+//  main.swift
+//  PJLinkSwift
+//
+//  Created by Eric Hyche on 6/11/20.
+//
 
-print("Hello, PJLinkServer!")
+import Foundation
+import PJLinkSwift
 
+do {
+    
+} catch {
+    print("Error: \(error)")
+}

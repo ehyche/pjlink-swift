@@ -57,7 +57,8 @@ public class PJLinkServer {
     }
 
     private func handleData(data: Data, connectionId: Int) {
-        print("PJLinkServer.handleData(\(data),connectionId:\(connectionId))")
+        let dataStr = String(data: data, encoding: .utf8) ?? "Bad UTF8"
+        print("PJLinkServer.handleData(\"\(dataStr)\",connectionId:\(connectionId))")
         sendResponse(toRequestData: data, onConnectionId: connectionId)
     }
 
@@ -79,6 +80,8 @@ public class PJLinkServer {
             let responseInfo = try session.response(forRequestData: data, projectorState: state)
             sessions[connectionId] = session
             state = responseInfo.updatedState
+            let dataStr = String(data: responseInfo.responseData, encoding: .utf8) ?? "Bad UTF8"
+            print("PJLinkServer send(\"\(dataStr)\",onConnectionWithId:\(connectionId))")
             tcpServer.send(responseInfo.responseData, onConnectionWithId: connectionId)
         } catch {
             handleError(error)

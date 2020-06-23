@@ -1,0 +1,59 @@
+{
+    "power": "0",
+    "currentInputNumber": "51",
+    "audioMuted": false,
+    "videoMuted": false,
+    "errorStatus": {
+        "fan": "0",
+        "lamp": "0",
+        "temperature": "0",
+        "coverOpen": "0",
+        "filter": "0",
+        "other": "0"
+    },
+    "lampsStatus": [
+        {
+            "usage": 1234,
+            "state": "0"
+        },
+        {
+            "usage": 2345,
+            "state": "0"
+        }
+    ],
+    "inputs": [
+        {
+            "number": "31",
+            "name": "PC"
+        },
+        {
+            "number": "51",
+            "name": "HDMI1"
+        },
+        {
+            "number": "52",
+            "name": "HDMI2"
+        },
+    ],
+    "projectorName": "PJLink1",
+    "manufacturerName": "HeirPlay Software",
+    "productName": "PJLinkServer",
+    "modelInformation": "Model X",
+    "highestSupportedClass": "2",
+    "serialNumber": "123-456-789",
+    "softwareVersion": "1.0.0",
+    "inputResolution": "1920x1080",
+    "recommendedResolution": "1920x1080",
+    "filterUsageTime": 123,
+    "lampReplacementModelNumbers": [
+        "123-45",
+        "678-90"
+    ],
+    "filterReplacementModelNumbers": [
+        "123-45",
+        "678-90"
+    ],
+    "speakerVolume": 50,
+    "microphoneVolume": 50,
+    "screenFrozen": false
+}

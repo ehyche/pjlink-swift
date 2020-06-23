@@ -53,7 +53,7 @@ public class TCPServerConnection {
     public func send(_ data: Data) {
         print("TCPServerConnection.send(data=\(data))")
         nwConnection.send(content: data, completion: .contentProcessed({ [weak self] (error) in
-            print("TCPServerConnection.NWConnection.sendCompletion(error=\(String(describing: error))")
+            print("TCPServerConnection.NWConnection.sendCompletion(error=\(String(describing: error)))")
             if let error = error {
                 self?.stop(withError: error)
             }

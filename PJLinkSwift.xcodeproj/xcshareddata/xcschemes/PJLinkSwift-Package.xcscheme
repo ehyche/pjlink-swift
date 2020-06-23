@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "PJLinkSwift::PJLinkServer"
-               BuildableName = "PJLinkServer"
-               BlueprintName = "PJLinkServer"
+               BlueprintIdentifier = "PJLinkSwift::PJLinkSwift"
+               BuildableName = "PJLinkSwift.framework"
+               BlueprintName = "PJLinkSwift"
                ReferencedContainer = "container:PJLinkSwift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "PJLinkSwift::PJLinkSwift"
-               BuildableName = "PJLinkSwift.framework"
-               BlueprintName = "PJLinkSwift"
+               BlueprintIdentifier = "PJLinkSwift::PJLinkServer"
+               BuildableName = "PJLinkServer"
+               BlueprintName = "PJLinkServer"
                ReferencedContainer = "container:PJLinkSwift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

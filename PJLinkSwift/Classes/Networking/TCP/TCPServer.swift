@@ -69,6 +69,8 @@ public class TCPServer {
     }
     
     public func send(_ data: Data, onConnectionWithId connectionId: Int) {
+        let str = String(data: data, encoding: .utf8)!
+        print("TCPServer.send(,onConnectionWithId: \(connectionId)) data=\"\(str)\"")
         if let conn = connectionMap[connectionId] {
             conn.send(data)
         }
@@ -80,8 +82,6 @@ public class TCPServer {
         print("TCPServer.stateWasUpdated(\(state))")
         switch state {
         case .failed(let error):
-            stop(withError: error)
-        case .waiting(let error):
             stop(withError: error)
         default:
             break
@@ -101,9 +101,9 @@ public class TCPServer {
         tcpConnection.onEnd = { [weak self] (conn, error) in
             self?.handleConnectionEnd(conn, error: error)
         }
-        connectionId += 1
         connectionMap[connectionId] = tcpConnection
-        
+        connectionId += 1
+
         tcpConnection.start(on: queue)
         
         onNewConnection?(tcpConnection.connectionId)

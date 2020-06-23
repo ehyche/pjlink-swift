@@ -7,12 +7,32 @@
 
 import Foundation
 
-public struct ResolutionInfo: Codable {
+public struct ResolutionInfo {
     public var horizontal: Int
     public var vertical: Int
 
     private static let separatorToken: Character = "x"
 }
+
+extension ResolutionInfo: Encodable {
+
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(self.toString())
+    }
+
+}
+
+extension ResolutionInfo: Decodable {
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        let string = try container.decode(String.self)
+        try self.init(fromString: string)
+    }
+
+}
+
 
 extension ResolutionInfo: Serializable {
 
